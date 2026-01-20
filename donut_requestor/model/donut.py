@@ -5,7 +5,7 @@ from donut_requestor.helper.exceptions import BoxIsFullException
 
 
 class Flavour(StrEnum):
-    CHOCOLATE = "choco"
+    CHOCOLATE = "chocolate"
     VANILLA = "vanilla"
     STRAWBERRY = "strawberry"
 
@@ -23,18 +23,18 @@ class Donut(BaseModel):
 
 
 class DonutBox:
-    amount: int
+    size: int
     _donuts: list[Donut] = []
 
-    def __init__(self, amount: int):
-        self.amount = amount
+    def __init__(self, size: int):
+        self.size = size
 
     @property
     def donuts(self) -> list[Donut]:
         return self._donuts
 
     def add_donut(self, donut: Donut):
-        if self.amount - 1 <= 0:
+        if self.size - 1 <= 0:
             raise BoxIsFullException(message="You can't add more donuts on the box")
         self._donuts.append(donut)
 
